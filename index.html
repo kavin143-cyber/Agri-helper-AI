@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgroVision AI | Smart Agriculture</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">
+        🌿 <span>AgroVision</span> <b>AI</b>
+    </div>
+
+    <nav>
+        <a href="#home" data-en="Home" data-ta="முகப்பு">Home</a>
+        <a href="#crops" data-en="Crops" data-ta="பயிர்கள்">Crops</a>
+        <a href="#doctor" data-en="AI Doctor" data-ta="AI மருத்துவர்">AI Doctor</a>
+        <a href="#solutions" data-en="Solutions" data-ta="தீர்வுகள்">Solutions</a>
+    </nav>
+
+    <button id="languageBtn">தமிழ்</button>
+</header>
+
+
+<!-- HERO -->
+<section id="home" class="hero">
+
+    <div class="hero-text">
+
+        <span class="badge">
+            🤖 AI POWERED AGRICULTURE
+        </span>
+
+        <h1>
+            Smart Farming.<br>
+            <span>Healthy Crops.</span><br>
+            Better Future.
+        </h1>
+
+        <p id="heroDescription">
+            AI technology helps farmers identify crop diseases,
+            understand problems and find suitable solutions.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#doctor" class="primary-btn">
+                🔍 Check My Plant
+            </a>
+
+            <a href="#crops" class="secondary-btn">
+                🌱 Explore Crops
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="ai-circle">
+            <div class="scan-line"></div>
+            🌿
+        </div>
+
+        <div class="floating-card card-one">
+            🧠
+            <div>
+                <b>AI Analysis</b>
+                <small>Machine Learning</small>
+            </div>
+        </div>
+
+        <div class="floating-card card-two">
+            🌱
+            <div>
+                <b>Crop Health</b>
+                <small>Smart Detection</small>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+<section class="stats">
+
+    <div>
+        <strong>AI</strong>
+        <span>Plant Analysis</span>
+    </div>
+
+    <div>
+        <strong>ML</strong>
+        <span>Disease Detection</span>
+    </div>
+
+    <div>
+        <strong>2</strong>
+        <span>Languages</span>
+    </div>
+
+    <div>
+        <strong>24/7</strong>
+        <span>Smart Assistance</span>
+    </div>
+
+</section>
+
+
+<!-- CROPS -->
+<section id="crops" class="section">
+
+    <div class="section-title">
+        <span>🌾 CROP LIBRARY</span>
+        <h2>Know Your Crops</h2>
+        <p>
+            Explore common crops and understand their basic needs.
+        </p>
+    </div>
+
+    <div class="crop-grid">
+
+        <div class="crop-card">
+            <div class="crop-image rice">🌾</div>
+            <h3>Rice</h3>
+            <p>நெல்</p>
+            <span>💧 High Water</span>
+        </div>
+
+        <div class="crop-card">
+            <div class="crop-image tomato">🍅</div>
+            <h3>Tomato</h3>
+            <p>தக்காளி</p>
+            <span>☀️ Sun Loving</span>
+        </div>
+
+        <div class="crop-card">
+            <div class="crop-image cotton">🌿</div>
+            <h3>Cotton</h3>
+            <p>பருத்தி</p>
+            <span>🌱 Warm Climate</span>
+        </div>
+
+        <div class="crop-card">
+            <div class="crop-image chilli">🌶️</div>
+            <h3>Chilli</h3>
+            <p>மிளகாய்</p>
+            <span>☀️ Warm Weather</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AI DOCTOR -->
+<section id="doctor" class="doctor-section">
+
+    <div class="section-title light">
+
+        <span>🧠 MACHINE LEARNING</span>
+
+        <h2>AI Crop Doctor</h2>
+
+        <p>
+            Upload a plant or leaf photo and let AI analyze it.
+        </p>
+
+        <p>
+            உங்கள் செடியின் இலை புகைப்படத்தை upload செய்து
+            AI மூலம் நோயை கண்டறியுங்கள்.
+        </p>
+
+    </div>
+
+
+    <div class="doctor-box">
+
+        <div class="upload-area" id="uploadArea">
+
+            <div class="upload-icon">
+                📸
+            </div>
+
+            <h3>
+                Upload Plant Image
+            </h3>
+
+            <p>
+                JPG, JPEG or PNG
+            </p>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                hidden
+            >
+
+            <button
+                class="upload-btn"
+                onclick="document.getElementById('imageInput').click()"
+            >
+                Choose Image
+            </button>
+
+        </div>
+
+
+        <div class="preview-area">
+
+            <img id="previewImage" alt="Plant preview">
+
+            <div id="scanStatus">
+                Upload an image to start AI analysis.
+            </div>
+
+            <div class="loader" id="loader"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULT -->
+    <div class="result-box" id="resultBox">
+
+        <div class="result-header">
+
+            <div>
+                <span>AI DIAGNOSIS</span>
+                <h2 id="diseaseName">
+                    Waiting for image...
+                </h2>
+            </div>
+
+            <div class="confidence">
+                <strong id="confidenceValue">--%</strong>
+                <small>Confidence</small>
+            </div>
+
+        </div>
+
+
+        <div class="confidence-bar">
+            <div id="confidenceBar"></div>
+        </div>
+
+
+        <div class="solution-grid">
+
+            <div class="solution-card">
+                <span>🔎</span>
+                <h3>Problem</h3>
+                <p id="problemText">
+                    AI analysis will appear here.
+                </p>
+            </div>
+
+            <div class="solution-card">
+                <span>💡</span>
+                <h3>Solution</h3>
+                <p id="solutionText">
+                    Recommended solution will appear here.
+                </p>
+            </div>
+
+            <div class="solution-card">
+                <span>🛡️</span>
+                <h3>Prevention</h3>
+                <p id="preventionText">
+                    Prevention tips will appear here.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section">
+
+    <div class="section-title">
+
+        <span>⚙️ HOW IT WORKS</span>
+
+        <h2>AI Crop Diagnosis</h2>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+            <div>01</div>
+            <h3>Upload</h3>
+            <p>
+                Upload a clear photo of the crop leaf.
+            </p>
+        </div>
+
+        <div class="step">
+            <div>02</div>
+            <h3>AI Scan</h3>
+            <p>
+                Machine learning model analyzes the image.
+            </p>
+        </div>
+
+        <div class="step">
+            <div>03</div>
+            <h3>Detection</h3>
+            <p>
+                The model predicts the possible disease.
+            </p>
+        </div>
+
+        <div class="step">
+            <div>04</div>
+            <h3>Solution</h3>
+            <p>
+                Get practical prevention and care suggestions.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SOLUTIONS -->
+<section id="solutions" class="solution-section">
+
+    <div class="section-title">
+
+        <span>🌱 SMART FARMING</span>
+
+        <h2>Grow Better With Knowledge</h2>
+
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature">
+            <span>💧</span>
+            <h3>Smart Irrigation</h3>
+            <p>
+                Use water efficiently according to crop requirements.
+            </p>
+        </div>
+
+        <div class="feature">
+            <span>🐛</span>
+            <h3>Pest Awareness</h3>
+            <p>
+                Identify common pest problems early.
+            </p>
+        </div>
+
+        <div class="feature">
+            <span>🌦️</span>
+            <h3>Weather Ready</h3>
+            <p>
+                Plan farming activities according to weather conditions.
+            </p>
+        </div>
+
+        <div class="feature">
+            <span>🧪</span>
+            <h3>Soil Knowledge</h3>
+            <p>
+                Understand soil and crop requirements.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="logo">
+        🌿 AgroVision <b>AI</b>
+    </div>
+
+    <p>
+        AI-powered agriculture for a smarter tomorrow.
+    </p>
+
+    <p class="copyright">
+        © 2026 AgroVision AI
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+      </html>
